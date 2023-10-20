@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+activate MainThread
+MainThread -> JoinThread1 : start()
+activate JoinThread1
+MainThread -> JoinThread2 : start()
+activate JoinThread2
+
+
+
+JoinThread2 -> MainThread : 종료
+destroy JoinThread2
+JoinThread1 -> MainThread : 종료
+destroy JoinThread1
+
+
+@enduml

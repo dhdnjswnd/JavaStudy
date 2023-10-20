@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+activate MainThread
+MainThread -> waitThread : start()
+activate waitThread
+MainThread -> MainThread : wait()
+deactivate MainThread
+waitThread -> MainThread : notify()
+activate MainThread
+
+@enduml

@@ -117,4 +117,41 @@ public class ThreadTest {
             }
         }
     }
+
+    // waitAndNotify예시
+    public static class JoinSample {
+        public static class JoinThread extends Thread {
+            @Override
+            public void run() {
+                System.out.println(Thread.currentThread().getName()+" is Processing : " + LocalDateTime.now());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println(Thread.currentThread().getName()+" is Terminated : " + LocalDateTime.now());
+            }
+        }
+
+        public static void main(String[] args) {
+//            for(int i=0; i<5; i++){
+//                Thread thread = new JoinThread();
+//                thread.setName("join_"+i);
+//                thread.start();
+//            }
+//            System.out.println("MainThread End");
+
+            for(int i=0; i<5; i++){
+                Thread thread = new JoinThread();
+                thread.setName("join_"+i);
+                thread.start();
+                try {
+                    thread.join();
+                }catch (InterruptedException interruptedException){
+                    interruptedException.printStackTrace();
+                }
+            }
+            System.out.println("MainThread End");
+        }
+    }
 }
